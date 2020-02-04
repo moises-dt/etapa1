@@ -92,7 +92,7 @@
           <div class="form-row">
             <div class="form-group col-md-2">
               <label>Nr Cliente</label>
-              <input type="text" name="id" class="form-control" value="<?php echo $id ?>">
+              <input type="text" name="id" class="form-control" value="<?php echo $id ?>" readonly="">
               </div>
               <div class="form-group col-md-10">
               <label>Nome</label>
@@ -152,6 +152,22 @@
     </main>
   </div>
 </div>
+<script type="text/javascript"> 
+    $("#cep").focusout(function(){
+      $.ajax({ 
+        url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+        dataType: 'json',
+        success: function(resposta){
+          $("#logradouro").val(resposta.logradouro);
+          $("#complemento").val(resposta.complemento);
+          $("#bairro").val(resposta.bairro);
+          $("#cidade").val(resposta.localidade);
+          $("#uf").val(resposta.uf);
+          $("#numero").focus();
+        }
+      });
+    });
+  </script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
